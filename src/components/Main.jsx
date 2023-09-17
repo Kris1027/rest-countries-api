@@ -3,6 +3,7 @@ import Country from './Country';
 
 function Main() {
   const [countryData, setCountryData] = useState(null);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/all`)
@@ -15,6 +16,10 @@ function Main() {
       });
   }, []);
 
+  function handleFilterChange(e) {
+    setFilter(e.target.value);
+  }
+
   return (
     <main className='min-h-screen bg-sky-950 flex flex-col items-center'>
       <form className='flex flex-col gap-y-6 pt-6 pb-24 w-96'>
@@ -22,6 +27,8 @@ function Main() {
           className='bg-sky-900 w-full text-sky-100 placeholder:text-sky-100 py-4 px-6 rounded-md'
           type='search'
           placeholder='Search for a country...'
+          value={filter}
+          onChange={handleFilterChange}
         />
         <select className=' max-w bg-sky-900 text-sky-100 py-4 px-6 rounded-md'>
           <option value='default' disabled>
@@ -35,9 +42,13 @@ function Main() {
         </select>
       </form>
       {countryData !== null &&
-        countryData.map((country) => (
-          <Country key={country.name} countryData={country} />
-        ))}
+        countryData
+          .filter((country) =>
+            country.name.common.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((country) => (
+            <Country key={country.name.common} countryData={country} />
+          ))}
     </main>
   );
 }
