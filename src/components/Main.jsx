@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Country from './Country';
 
-function Main() {
+function Main({ isDarkMode }) {
   const [countryData, setCountryData] = useState(null);
   const [filter, setFilter] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
@@ -26,17 +26,27 @@ function Main() {
   }
 
   return (
-    <main className='min-h-screen bg-sky-950 flex flex-col items-center'>
+    <main
+      className={`min-h-screen ${
+        isDarkMode ? 'bg-sky-950' : 'bg-sky-200'
+      } flex flex-col items-center duration-200 ease-linear`}
+    >
       <form className='flex flex-col gap-y-6 pt-6 pb-24 w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px] 2xl:w-[800px]'>
         <input
-          className='bg-sky-900 w-full text-sky-100 placeholder:text-sky-100 py-4 px-6 rounded-md focus:ring-0 focus:outline-none'
+          className={`${
+            isDarkMode
+              ? 'bg-sky-900 placeholder:text-sky-100 text-sky-100'
+              : 'bg-sky-100 placeholder:text-sky-900 text-sky-900'
+          } py-4 px-6 rounded-md focus:ring-0 focus:outline-none duration-200 ease-linear`}
           type='search'
           placeholder='Search for a country...'
           value={filter}
           onChange={handleFilterChange}
         />
         <select
-          className='max-w bg-sky-900 text-sky-100 py-4 px-6 rounded-md focus:ring-0 focus:outline-none'
+          className={`max-w ${
+            isDarkMode ? 'bg-sky-900 text-sky-100' : 'bg-sky-100 text-sky-900'
+          } py-4 px-6 rounded-md focus:ring-0 focus:outline-none duration-200 ease-linear`}
           value={selectedRegion}
           onChange={handleRegionChange}
         >
@@ -60,7 +70,11 @@ function Main() {
                 : country.region === selectedRegion
             )
             .map((country) => (
-              <Country key={country.name.common} countryData={country} />
+              <Country
+                key={country.name.common}
+                countryData={country}
+                isDarkMode={isDarkMode}
+              />
             ))}
       </div>
     </main>
