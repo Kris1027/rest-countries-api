@@ -27,16 +27,16 @@ function Main() {
 
   return (
     <main className='min-h-screen bg-sky-950 flex flex-col items-center'>
-      <form className='flex flex-col gap-y-6 pt-6 pb-24 w-96'>
+      <form className='flex flex-col gap-y-6 pt-6 pb-24 w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px] 2xl:w-[800px]'>
         <input
-          className='bg-sky-900 w-full text-sky-100 placeholder:text-sky-100 py-4 px-6 rounded-md'
+          className='bg-sky-900 w-full text-sky-100 placeholder:text-sky-100 py-4 px-6 rounded-md focus:ring-0 focus:outline-none'
           type='search'
           placeholder='Search for a country...'
           value={filter}
           onChange={handleFilterChange}
         />
         <select
-          className='max-w bg-sky-900 text-sky-100 py-4 px-6 rounded-md'
+          className='max-w bg-sky-900 text-sky-100 py-4 px-6 rounded-md focus:ring-0 focus:outline-none'
           value={selectedRegion}
           onChange={handleRegionChange}
         >
@@ -48,17 +48,21 @@ function Main() {
           <option value='Oceania'>Oceania</option>
         </select>
       </form>
-      {countryData !== null &&
-        countryData
-          .filter((country) =>
-            country.name.common.toLowerCase().includes(filter.toLowerCase())
-          )
-          .filter((country) =>
-            selectedRegion === 'all' ? true : country.region === selectedRegion
-          )
-          .map((country) => (
-            <Country key={country.name.common} countryData={country} />
-          ))}
+      <div className='flex flex-wrap justify-center'>
+        {countryData !== null &&
+          countryData
+            .filter((country) =>
+              country.name.common.toLowerCase().includes(filter.toLowerCase())
+            )
+            .filter((country) =>
+              selectedRegion === 'all'
+                ? true
+                : country.region === selectedRegion
+            )
+            .map((country) => (
+              <Country key={country.name.common} countryData={country} />
+            ))}
+      </div>
     </main>
   );
 }
