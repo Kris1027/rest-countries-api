@@ -7,6 +7,10 @@ function CountryInfo() {
   if (!countryData) return <div>Loading...</div>;
   console.log(countryData[0]);
 
+  function formatPopulation(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   return (
     <div className='bg-sky-950 text-sky-100 h-screen p-12'>
       <Link to='/'>
@@ -21,7 +25,7 @@ function CountryInfo() {
         <div>
           <h2>{countryData[0].name.common}</h2>
           <p>Native Name: {countryData[0].name.official}</p>
-          <p>Population: {countryData[0].population}</p>
+          <p>Population: {formatPopulation(countryData[0].population)}</p>
           <p>Region: {countryData[0].region}</p>
           <p>Sub Region: {countryData[0].subregion}</p>
           <p>Capital: {countryData[0].capital}</p>

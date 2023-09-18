@@ -6,6 +6,10 @@ function Country({ countryData }) {
 
   if (!countryData) return <div>Loading...</div>;
 
+  function formatPopulation(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   return (
     <Link to='/country'>
       <div
@@ -17,7 +21,8 @@ function Country({ countryData }) {
         <div className='flex flex-col p-10'>
           <h2 className='font-bold text-xl pb-4'>{countryData.name.common}</h2>
           <p>
-            <strong>Population:</strong> {countryData.population}
+            <strong>Population:</strong>{' '}
+            {formatPopulation(countryData.population)}
           </p>
           <p>
             <strong>Region:</strong> {countryData.region}
