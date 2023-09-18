@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import Country from './Country';
+import { useTheme } from '../contexts/themeContext';
 
-function Main({ isDarkMode }) {
+function Main() {
+  const { isDarkMode } = useTheme();
+
   const [countryData, setCountryData] = useState(null);
   const [filter, setFilter] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
@@ -70,11 +73,7 @@ function Main({ isDarkMode }) {
                 : country.region === selectedRegion
             )
             .map((country) => (
-              <Country
-                key={country.name.common}
-                countryData={country}
-                isDarkMode={isDarkMode}
-              />
+              <Country key={country.name.common} countryData={country} />
             ))}
       </div>
     </main>

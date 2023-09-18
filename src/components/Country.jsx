@@ -1,4 +1,8 @@
-function Country({ countryData, isDarkMode }) {
+import { useTheme } from '../contexts/themeContext';
+
+function Country({ countryData }) {
+  const { isDarkMode } = useTheme();
+
   if (!countryData) return <div>Loading...</div>;
 
   return (

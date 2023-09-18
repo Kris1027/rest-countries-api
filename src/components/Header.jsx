@@ -1,4 +1,8 @@
-function Header({ isDarkMode, toggleDarkMode }) {
+import { useTheme } from '../contexts/themeContext';
+
+function Header() {
+  const { isDarkMode, toggleDarkMode } = useTheme();
+
   return (
     <header
       className={`flex justify-between items-center ${
