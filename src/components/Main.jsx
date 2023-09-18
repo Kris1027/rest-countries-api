@@ -1,24 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Country from './Country';
 import { useTheme } from '../contexts/themeContext';
+import { useData } from '../contexts/dataContext';
 
 function Main() {
   const { isDarkMode } = useTheme();
+  const { countryData } = useData();
 
-  const [countryData, setCountryData] = useState(null);
   const [filter, setFilter] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
-
-  useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/all`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCountryData(data);
-      })
-      .catch((error) => {
-        console.error('Somethin went wrong grr:', error);
-      });
-  }, []);
 
   function handleFilterChange(e) {
     setFilter(e.target.value);
