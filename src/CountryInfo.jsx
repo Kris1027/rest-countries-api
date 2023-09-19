@@ -1,8 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { useData } from './contexts/dataContext';
+import { useTheme } from './contexts/themeContext';
 
 function CountryInfo() {
   const { countryData } = useData();
+  const { isDarkMode } = useTheme();
+
   const { countryName } = useParams();
 
   if (!countryData) return <div>Loading...</div>;
@@ -20,9 +23,19 @@ function CountryInfo() {
   }
 
   return (
-    <div className='bg-sky-950 text-sky-100 h-screen p-12'>
+    <div
+      className={`${
+        isDarkMode
+          ? 'bg-sky-950 text-sky-100'
+          : 'bg-sky-200 text-sky-950 transition-colors duration-200 ease-linear'
+      } h-screen p-12`}
+    >
       <Link to='/'>
-        <button className='py-3 px-10 bg-sky-900 rounded-lg active:scale-90 hover:scale-110'>
+        <button
+          className={`${
+            isDarkMode ? 'bg-sky-900 text-sky-100' : 'bg-sky-100 text-sky-950'
+          } py-3 px-10 rounded-lg active:scale-90 hover:scale-110 transition-colors duration-200 ease-linear`}
+        >
           Back
         </button>
       </Link>
