@@ -11,7 +11,7 @@ function Country({ countryData }) {
   }
 
   return (
-    <Link to='/country'>
+    <Link to={`/${countryData.name.common}`}>
       <div
         className={`${
           isDarkMode ? 'bg-sky-900 text-sky-100' : 'bg-sky-100 text-sky-900'
