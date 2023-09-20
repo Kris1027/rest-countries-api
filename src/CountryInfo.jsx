@@ -34,65 +34,86 @@ function CountryInfo() {
         <button
           className={`${
             isDarkMode ? 'bg-sky-900 text-sky-100' : 'bg-sky-100 text-sky-950'
-          } py-3 px-10 rounded-lg active:scale-90 hover:scale-110 transition-colors duration-200 ease-linear`}
+          } text-lg py-2 px-10 mb-16 rounded active:scale-90 hover:scale-110 transition-colors duration-200 ease-linear drop-shadow-xl`}
         >
-          Back
+          ← Back
         </button>
       </Link>
-      <img className='pb-10 lg:pr-10' src={selectedCountry.flags.png} alt='' />
-      <h2 className='font-bold text-xl pb-4'>{countryName}</h2>
-      <p>
-        <strong>Official Name:</strong> {selectedCountry.name.official}
-      </p>
-      <p>
-        <strong>Population:</strong>{' '}
-        {formatPopulation(selectedCountry.population)}
-      </p>
-      <p>
-        <strong>Region:</strong> {selectedCountry.region}
-      </p>
-      <p>
-        <strong>Sub Region:</strong> {selectedCountry.subregion}
-      </p>
-      <p>
-        <strong>Capital:</strong> {selectedCountry.capital}
-      </p>
-      <p>
-        <strong>Top Level Domain:</strong> {selectedCountry.tld}
-      </p>
-      <p>
-        <strong>Currencies:</strong>{' '}
-        {Object.keys(selectedCountry.currencies).map((currencyCode) => (
-          <span key={currencyCode}>
-            {selectedCountry.currencies[currencyCode].name}
-            {currencyCode !==
-            Object.keys(selectedCountry.currencies).slice(-1)[0]
-              ? ', '
-              : ''}
-          </span>
-        ))}
-      </p>
-
-      <p>
-        <strong>Languages:</strong>{' '}
-        {Object.keys(selectedCountry.languages).map((languageCode) => (
-          <span key={languageCode}>
-            {selectedCountry.languages[languageCode]}
-            {languageCode !==
-            Object.keys(selectedCountry.languages).slice(-1)[0]
-              ? ', '
-              : ''}
-          </span>
-        ))}
-      </p>
-      <p>
-        <strong>Borders:</strong>
-        {selectedCountry.borders.map((item, index) => (
-          <span className='bg-sky-900 mx-2 p-2' key={index}>
-            {item}
-          </span>
-        ))}
-      </p>
+      <div className='flex flex-col lg:items-center lg:flex-row lg:gap-x-12'>
+        <div>
+          <img src={selectedCountry.flags.png} alt='country flag' />
+        </div>
+        <div className='flex flex-col gap-y-8'>
+          <div>
+            <h2 className='font-bold text-xl pt-12'>{countryName}</h2>
+          </div>
+          <div className='flex flex-col gap-y-12 lg:flex-row lg:gap-x-20'>
+            <div>
+              <p>
+                <strong>Official Name:</strong> {selectedCountry.name.official}
+              </p>
+              <p>
+                <strong>Population:</strong>{' '}
+                {formatPopulation(selectedCountry.population)}
+              </p>
+              <p>
+                <strong>Region:</strong> {selectedCountry.region}
+              </p>
+              <p>
+                <strong>Sub Region:</strong> {selectedCountry.subregion}
+              </p>
+              <p>
+                <strong>Capital:</strong> {selectedCountry.capital}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Top Level Domain:</strong> {selectedCountry.tld}
+              </p>
+              <p>
+                <strong>Currencies:</strong>{' '}
+                {Object.keys(selectedCountry.currencies).map((currencyCode) => (
+                  <span key={currencyCode}>
+                    {selectedCountry.currencies[currencyCode].name}
+                    {currencyCode !==
+                    Object.keys(selectedCountry.currencies).slice(-1)[0]
+                      ? ', '
+                      : ''}
+                  </span>
+                ))}
+              </p>
+              <p>
+                <strong>Languages:</strong>{' '}
+                {Object.keys(selectedCountry.languages).map((languageCode) => (
+                  <span key={languageCode}>
+                    {selectedCountry.languages[languageCode]}
+                    {languageCode !==
+                    Object.keys(selectedCountry.languages).slice(-1)[0]
+                      ? ', '
+                      : ''}
+                  </span>
+                ))}
+              </p>
+            </div>
+          </div>
+          <div>
+            <p>
+              <strong className='block pb-4 lg:inline'>
+                Border Countries:
+              </strong>
+              {selectedCountry.borders ? (
+                selectedCountry.borders.map((item, index) => (
+                  <span className='bg-sky-900 mx-2 p-2' key={index}>
+                    {item}
+                  </span>
+                ))
+              ) : (
+                <span className='bg-sky-900 mx-2 p-2'>No Border Countries</span>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
