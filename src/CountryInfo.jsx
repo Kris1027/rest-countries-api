@@ -103,12 +103,27 @@ function CountryInfo() {
               </strong>
               {selectedCountry.borders ? (
                 selectedCountry.borders.map((item, index) => (
-                  <span className='bg-sky-900 mx-2 p-2' key={index}>
+                  <span
+                    className={`${
+                      isDarkMode
+                        ? 'bg-sky-900 text-sky-100'
+                        : 'bg-sky-100 text-sky-950'
+                    } mx-2 py-2 px-6 rounded`}
+                    key={index}
+                  >
                     {item}
                   </span>
                 ))
               ) : (
-                <span className='bg-sky-900 mx-2 p-2'>No Border Countries</span>
+                <span
+                  className={`${
+                    isDarkMode
+                      ? 'bg-sky-900 text-sky-100'
+                      : 'bg-sky-100 text-sky-950'
+                  } mx-2 py-2 px-6 rounded`}
+                >
+                  No Border Countries
+                </span>
               )}
             </p>
           </div>

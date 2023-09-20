@@ -5,7 +5,7 @@ import { DataProvider } from './contexts/dataContext';
 
 function App() {
   return (
-    <div className=' max-w-[1440px] mx-auto shadow-xl'>
+    <div className='max-w-[1440px] mx-auto shadow-xl'>
       <ThemeProvider>
         <DataProvider>
           <Header />
