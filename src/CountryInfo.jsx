@@ -28,7 +28,7 @@ function CountryInfo() {
         isDarkMode
           ? 'bg-sky-950 text-sky-100'
           : 'bg-sky-200 text-sky-950 transition-colors duration-200 ease-linear'
-      } h-screen p-12`}
+      } h-full min-h-screen p-12`}
     >
       <Link to='/'>
         <button
@@ -101,30 +101,32 @@ function CountryInfo() {
               <strong className='block pb-4 lg:inline'>
                 Border Countries:
               </strong>
-              {selectedCountry.borders ? (
-                selectedCountry.borders.map((item, index) => (
+              <span className='flex flex-wrap gap-2'>
+                {selectedCountry.borders ? (
+                  selectedCountry.borders.map((item, index) => (
+                    <span
+                      className={`${
+                        isDarkMode
+                          ? 'bg-sky-900 text-sky-100'
+                          : 'bg-sky-100 text-sky-950'
+                      } py-2 px-6 rounded`}
+                      key={index}
+                    >
+                      {item}
+                    </span>
+                  ))
+                ) : (
                   <span
                     className={`${
                       isDarkMode
                         ? 'bg-sky-900 text-sky-100'
                         : 'bg-sky-100 text-sky-950'
-                    } mx-2 py-2 px-6 rounded`}
-                    key={index}
+                    } py-2 px-6 rounded`}
                   >
-                    {item}
+                    No Border Countries
                   </span>
-                ))
-              ) : (
-                <span
-                  className={`${
-                    isDarkMode
-                      ? 'bg-sky-900 text-sky-100'
-                      : 'bg-sky-100 text-sky-950'
-                  } mx-2 py-2 px-6 rounded`}
-                >
-                  No Border Countries
-                </span>
-              )}
+                )}
+              </span>
             </p>
           </div>
         </div>
